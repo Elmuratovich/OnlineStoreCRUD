@@ -1,0 +1,59 @@
+﻿@model CodeSimpleCRUD.Models.Product
+
+ <tr>
+    <td>
+        <img src="@Model.ImageUrl" style="width: 40px; height: 40px;">
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.Code)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.Description)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.Category)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.Cost)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.Price)
+    </td>
+
+    <td>
+        <div class="btn-group">
+            @*<a asp-action="Edit" asp-route-id="@Model.Code" class="btn btn-sm btn-info">Edit</a>*@
+            @*<a asp-action="Details" asp-route-id="@Model.Code" class="btn btn-sm btn-primary m1-1">Details</a>*@
+
+            <form asp-action="EditProduct" asp-route-id="@Model.Code"
+                data-ajax="true" 
+                data-ajax-update="#DivDetailView"
+                data-ajax-success="ShowDetailForm()">
+                <button type="submit" class="btn btn-sm btn-info">
+                    Edit
+                </button>
+            </form>
+
+            <form asp-action="ViewProduct" asp-route-id="@Model.Code"
+                data-ajax="true"
+                data-ajax-update="#DivDetailView"
+                data-ajax-success="ShowDetailForm()">
+                <button type="submit" class="btn btn-sm btn-primary ml-1">
+                    Details
+                </button>
+            </form>
+            
+            <form asp-action="DeleteProduct" asp-route-id="@Model.Code"
+                 data-ajax="true" 
+                 data-ajax-success="deleteItem(this)" >
+                <button type="submit" class="btn btn-sm btn-danger ml-1"
+                onclick="return confirm('Delete Confirmation for Product @Model.Code');" >
+                    Delete
+                </button>
+            </form>
+        </div>
+    </td>
+</tr>
